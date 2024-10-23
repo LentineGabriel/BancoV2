@@ -11,19 +11,23 @@ namespace Banco
             try
             {
                 // assim que o usuário digitar, os campos serão verificados;
-                Console.Write("Nome completo: "); string name = Console.ReadLine();
+                Console.Write("Nome completo: ");
+                string name = Console.ReadLine();
                 ba.ValidateName(name);
 
-                Console.Write("Email: "); string email = Console.ReadLine();
+                Console.Write("Email: ");
+                string email = Console.ReadLine();
                 ba.ValidateEmail(email);
 
-                Console.Write("Gênero: "); char gender = char.Parse(Console.ReadLine());
+                Console.Write("Gênero: ");
+                char gender = char.Parse(Console.ReadLine());
                 ba.ValidateGender(gender);
 
                 Console.Write("Data de nascimento: "); DateTime birthDate = DateTime.Parse(Console.ReadLine());
                 int age = ba.ValidateBirthDate(birthDate);
 
-                Console.WriteLine("RG (apenas números): "); string rgInput = Console.ReadLine();
+                Console.Write("RG (apenas números): ");
+                string rgInput = Console.ReadLine();
                 ba.ValidateRG(rgInput);
                 ulong rg = ulong.Parse(rgInput); // o rg entra como string e sai como ulong após a verificação.
 
@@ -32,21 +36,21 @@ namespace Banco
 
                 Console.WriteLine("Wait...");
                 Thread.Sleep(2500);
-                Account.Display();
+                Account.DisplayBase();
 
                 // caso o usuário for menor de idade (verificação realizada no método BirthDate()), a única conta possível é a de adolescentes
                 if (age < 18)
                 {
-
+                    return;
                 }
             }
             catch (FormatException ex) // caso, onde se pede números, o usuário escreva letras, palavras ou frases.
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Erro: " + ex.Message);
             }
             catch (Exception ex) // outros erros (lembrando que os principais já estão sendo tratados em suas respectivas classes)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Erro: " + ex.Message);
             }
         }
     }
