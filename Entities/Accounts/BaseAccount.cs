@@ -1,7 +1,5 @@
 ﻿using Banco.Entities.Exceptions;
-using System;
 using System.Globalization;
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Banco.Entities.Accounts
@@ -95,7 +93,7 @@ namespace Banco.Entities.Accounts
             if (gender != 'M' && gender != 'F') throw new BaseAccExceptions("Gênero inválido! Apenas 'M' ou 'F' são permitidos.");
         }
 
-        // display
+        // display (esse daqui vai ficar responsável pelas duas contas principais: Conta Comum e Conta Empresarial)
         public void DisplayBase()
         {
             Console.Clear();
