@@ -58,7 +58,7 @@ namespace Banco
             }
             catch (FormatException ex) // caso, onde se pede números, o usuário escreva letras, palavras ou frases.
             {
-                Console.WriteLine("Erro: " + ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
             }
             catch (Exception ex) // outros erros (lembrando que os principais já estão sendo tratados em suas respectivas classes)
             {

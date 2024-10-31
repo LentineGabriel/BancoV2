@@ -29,18 +29,18 @@ namespace Banco.Entities.Accounts
         }
         
         // métodos de depósito e saque da poupança
-        public void Deposit(double amount)
+        public double? Deposit(double balance, double amount)
         {
-            if (amount > Balance) throw new EnterpriseAccExceptions("A quantia inserida não pode ser maior que o seu saldo.");
+            if (amount > balance) throw new EnterpriseAccExceptions("A quantia inserida não pode ser maior que o seu saldo.");
             if (amount <= 0.0) throw new EnterpriseAccExceptions("A quantia inserida não pode ser menor ou igual a zero.");
-            Balance -= amount;
+            return balance - amount;
         }
 
-        public void Withdraw(double amount)
+        public double? Withdraw(double balance, double amount)
         {
-            if (amount > Balance) throw new EnterpriseAccExceptions("A quantia inserida não pode ser maior que o seu saldo.");
+            if (amount > balance) throw new EnterpriseAccExceptions("A quantia inserida não pode ser maior que o seu saldo.");
             if (amount <= 0.0) throw new EnterpriseAccExceptions("A quantia inserida não pode ser menor ou igual a zero.");
-            Balance += amount;
+            return balance + amount;
         }
 
         // display
@@ -64,14 +64,14 @@ namespace Banco.Entities.Accounts
                     Console.WriteLine(); // pular uma linha.
                     Console.Write("Entre com a quantia ao qual gostaria de depositar: ");
                     double dAmount = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                    Deposit(dAmount);
+                    Balance = Deposit(Balance, dAmount) ?? Balance;
                     Console.WriteLine($"Sua quantia foi depositada com sucesso! Seu saldo agora é: R${Balance}");
                     Console.WriteLine($"O saldo em sua conta poupança é de: R${dAmount}");
                     break;
                 case 2:
                     Console.WriteLine("Entre com a quantia ao qual gostaria de sacar: ");
                     double wAmount = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                    Withdraw(wAmount);
+                    Balance = Withdraw(Balance, wAmount) ?? Balance;
                     Console.WriteLine($"Sua quantia foi depositada com sucesso! Seu saldo agora é: R${Balance}");
                     Console.WriteLine($"O saldo em sua conta poupança é de: R${wAmount}");
                     break;
